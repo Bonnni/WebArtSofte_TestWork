@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "Отображение всех сотрудников";
+}
+
+<p>Таблица сотрудники</p>
+<table class="table table-dark">
+    <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Возраст</th>
+        <th scope="col">Пол</th>
+        <th scope="col">Язык</th>
+        <th scope="col">Отдел</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    @foreach (var model in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => model.FirstName)</td>
+            <td>@Html.DisplayFor(m => model.LastName)</td>
+            <td>@Html.DisplayFor(m => model.Age)</td>
+            <td>@Html.DisplayFor(m => model.Gender)</td>
+            <td>@Html.DisplayFor(m => model.ProgrammingLanguages.Name)</td>
+            <td>@Html.DisplayFor(m => model.Departments.Name)</td>
+            <td>
+                <u>@Html.ActionLink("Изменить", "Edit", new { id = model.Id })</u>
+            </td>
+            <td>
+                @Html.ActionLink("x", "Delete", new { id = model.Id })
+            </td>
+        </tr>
+    }
+</table>
+<div class="d-flex justify-content-between">
+    <strong>Общее количество сотрудников: @Model.Count()</strong>
+    @Html.ActionLink("Добавить нового сотрудника", "Add", "Employee", null, new { @class = "btn btn-primary" })
+</div>
+
